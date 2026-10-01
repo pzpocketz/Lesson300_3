@@ -40,3 +40,11 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .tasks-date { gap: 6px; padding: 7px; }.tasks-date > svg { font-size: 16px; }.tasks-date span { font-size: 8px; }.task-summary { gap: 10px; padding: 14px 12px; }.task-summary-copy { gap: 8px; }.task-summary-copy > strong { font-size: 22px; }.task-summary-copy > span { font-size: 10px; }.task-summary-copy > span small { font-size: 8px; }.task-summary-right { width: 32%; }.task-summary-right > span { font-size: 7px; }.task-list-heading { align-items: flex-start; flex-direction: column; gap: 4px; margin-top: 20px; }.task-card { grid-template-columns: 44px minmax(0,1fr) auto; min-height: 72px; gap: 9px; padding: 9px 10px; }.task-check { width: 44px; height: 44px; }.task-copy strong { font-size: 10px; }.task-copy > span { font-size: 8px; }.task-due { grid-column: 2; grid-row: 2; align-self: start; margin-top: -5px; font-size: 7px; }.task-state { grid-column: 3; grid-row: 1 / span 2; font-size: 7px; }
 }
 @media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior: auto!important; animation-duration: .01ms!important; animation-iteration-count: 1!important; transition-duration: .01ms!important; } }
+@media (max-width: 640px) {
+  .asset-action.v-btn { height: 48px!important; min-height: 48px!important; }
+  .eyebrow,.progress-copy > span,.progress-remaining,.asset-id,.status-pill,.mobile-navigation button > span,
+  .incident-copy span,.incident-row time,.route-distance small,.map-legend span,.stop-copy small,.stop-copy em,
+  .tasks-date span,.tasks-date small,.task-copy > span,.task-due,.task-state { font-size: 9px; }
+  .asset-info h3,.incident-copy strong,.task-copy strong { font-size: 11px; }
+  .asset-info p { font-size: 10px; }
+}
