@@ -22,6 +22,10 @@ npm run dev
 
 Vite prints the local URL when the development server starts.
 
+## Access Gate
+
+The password gate is client-side and intended for demo access only. Its password is included in the browser bundle, so it does not protect sensitive data. Use server-side authentication before production deployment.
+
 ## Workflows
 
 - **Check-in:** search site assets, record condition and notes, and attach a photo.

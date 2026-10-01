@@ -27,6 +27,9 @@ const views: { id: View; label: string; icon: typeof PhClipboardText }[] = [
   { id: 'map', label: 'Map', icon: PhMapTrifold }, { id: 'tasks', label: 'Tasks', icon: PhListChecks },
 ]
 const activeView = ref<View>('check-in')
+const isAuthenticated = ref(readSessionApproval())
+const password = ref('')
+const passwordError = ref('')
 const isDarkMode = ref(readStored('theme', false))
 const vuetifyTheme = useTheme()
 const searchQuery = ref('')
@@ -49,6 +52,11 @@ const mapHost = ref<HTMLDivElement | null>(null)
 const touchStartX = ref<number | null>(null)
 let mapInstance: L.Map | null = null
 let noticeTimeout = 0
+
+function readSessionApproval() {
+  try { return sessionStorage.getItem('fieldops-access') === 'approved' }
+  catch { return false }
+}
 
 watch(isDarkMode, (dark) => {
   document.documentElement.classList.toggle('dark-mode', dark)
@@ -79,6 +87,16 @@ function persist(key: string, value: unknown) {
   catch { showNotice('Changes are available for this session only.') }
 }
 function toggleTheme() { isDarkMode.value = !isDarkMode.value }
+function submitPassword() {
+  if (password.value !== 'protogen2026') {
+    passwordError.value = 'Incorrect password. Try again.'
+    return
+  }
+  try { sessionStorage.setItem('fieldops-access', 'approved') }
+  catch { passwordError.value = 'Session storage is unavailable in this browser.'; return }
+  passwordError.value = ''
+  isAuthenticated.value = true
+}
 function showNotice(message: string) {
   notice.value = message
   window.clearTimeout(noticeTimeout)
@@ -159,7 +177,19 @@ onBeforeUnmount(() => { window.clearTimeout(noticeTimeout); mapInstance?.remove(
 </script>
 
 <template>
-  <div class="app-shell" :class="{ 'theme-dark': isDarkMode }">
+  <main v-if="!isAuthenticated" class="login-screen" :class="{ 'theme-dark': isDarkMode }">
+    <section class="login-panel" aria-labelledby="login-title">
+      <div class="login-brand"><span class="brand-mark"><PhNavigationArrow weight="fill" aria-hidden="true" /></span><span class="brand-copy"><strong>FIELD<span>OPS</span></strong><small>FIELDWORK CONSOLE</small></span></div>
+      <div class="login-heading"><span class="eyebrow">RIDGELINE ENERGY <i></i> SITE 4</span><h1 id="login-title">Sign in to FieldOps</h1></div>
+      <form class="login-form" @submit.prevent="submitPassword">
+        <label for="site-password">Site password</label>
+        <input id="site-password" v-model="password" type="password" autocomplete="current-password" required autofocus :aria-invalid="Boolean(passwordError)" :aria-describedby="passwordError ? 'password-error' : undefined" @input="passwordError = ''" />
+        <p v-if="passwordError" id="password-error" class="login-error" role="alert">{{ passwordError }}</p>
+        <button class="login-submit" type="submit">Submit <PhArrowRight aria-hidden="true" /></button>
+      </form>
+    </section>
+  </main>
+  <div v-else class="app-shell" :class="{ 'theme-dark': isDarkMode }">
     <header class="topbar"><a class="brand" href="#" aria-label="FieldOps home" @click.prevent="activeView = 'check-in'"><span class="brand-mark"><PhNavigationArrow weight="fill" /></span><span class="brand-copy"><strong>FIELD<span>OPS</span></strong><small>FIELDWORK CONSOLE</small></span></a><div class="site-identity"><span class="site-kicker">ACTIVE SITE</span><strong>Ridgeline Energy <i>/</i> Site 4</strong></div><div class="topbar-status"><span class="sync-status"><PhCloudCheck /><span><small>LAST SYNC</small><strong>09:14 AM</strong></span></span><span class="signal-status"><PhWifiHigh aria-label="Signal available" /><span>Connected</span></span><button class="theme-toggle" :aria-label="isDarkMode ? 'Switch to light theme' : 'Switch to dark theme'" :aria-pressed="isDarkMode" :title="isDarkMode ? 'Switch to light theme' : 'Switch to dark theme'" @click="toggleTheme"><PhSun v-if="isDarkMode" aria-hidden="true" /><PhMoon v-else aria-hidden="true" /></button><span class="date-status"><PhCalendarBlank /> THU, OCT 01</span></div></header>
     <div class="workspace">
       <aside class="sidebar" aria-label="Primary navigation"><span class="sidebar-label">WORKSPACE</span><nav class="side-navigation"><button v-for="view in views" :key="view.id" class="nav-item" :class="{ active: activeView === view.id }" :aria-current="activeView === view.id ? 'page' : undefined" @click="activeView = view.id"><component :is="view.icon" /><span>{{ view.label }}</span><b v-if="view.id === 'tasks' && overdueCount" class="nav-count">{{ overdueCount }}</b><PhCaretRight v-else-if="activeView === view.id" class="nav-chevron" /></button></nav><div class="sidebar-rule"></div><span class="sidebar-label">ON SHIFT</span><div class="crew-list"><div v-for="member in crew" :key="member.id" class="crew-member"><span class="crew-avatar" :class="`avatar-${member.id}`">{{ member.name.split(' ').map((part) => part[0]).join('') }}</span><span class="crew-copy"><strong>{{ member.name }}</strong><small>{{ member.role }}</small></span><i class="crew-online" :aria-label="`${member.name} on shift`"></i></div></div><div class="sidebar-bottom"><i></i><span><strong>Field mode active</strong><small>Data saved on this device</small></span></div></aside>

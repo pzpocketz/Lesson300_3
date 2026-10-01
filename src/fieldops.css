@@ -141,6 +141,29 @@ body:has(.theme-dark) { background: #10191e; }
   .site-identity { display: none; }
   .brand { margin-right: 12px; }
 }
+.login-screen { display: grid; min-height: 100vh; min-height: 100svh; place-items: center; padding: 24px; color: #1a1a1a; background: #f4f2ee; }
+.login-panel { width: min(100%, 416px); padding: 32px; border: 1px solid #d0cbc0; border-radius: 8px; background: #fff; box-shadow: 0 12px 32px #132d3b12; }
+.login-brand { display: flex; align-items: center; gap: 12px; }
+.login-heading { margin-top: 32px; }
+.login-heading .eyebrow { margin-bottom: 10px; }
+.login-heading h1 { color: #132d3b; font-size: 25px; font-weight: 700; line-height: 1.25; }
+.login-form { display: grid; gap: 10px; margin-top: 24px; }
+.login-form label { color: #35332e; font-size: 12px; font-weight: 600; }
+.login-form input { width: 100%; min-height: 56px; padding: 0 14px; border: 1px solid #89847a; border-radius: 6px; color: #1a1a1a; background: #fff; font-size: 16px; }
+.login-form input:focus-visible { border-color: #155b7b; outline: 3px solid #155b7b; outline-offset: 2px; }
+.login-error { margin-top: 1px; color: #a62d25; font-size: 12px; font-weight: 500; }
+.login-submit { display: flex; min-height: 56px; align-items: center; justify-content: center; gap: 8px; margin-top: 8px; border: 1px solid #9f3806; border-radius: 6px; color: #fff; background: #b9440a; font-size: 13px; font-weight: 600; cursor: pointer; transition: background 200ms ease-in-out; }
+.login-submit:hover { background: #9f3806; }
+.login-submit svg { font-size: 17px; }
+.theme-dark.login-screen { color: #edf3f4; background: #10191e; }
+.theme-dark .login-panel { border-color: #40515a; background: #17242b; box-shadow: 0 12px 32px #0005; }
+.theme-dark .login-heading h1 { color: #e7eff1; }
+.theme-dark .login-form label { color: #d5e0e3; }
+.theme-dark .login-form input { border-color: #708188; color: #edf3f4; background: #1c2b32; }
+.theme-dark .login-error { color: #ffb8b0; }
+.theme-dark .login-submit { border-color: #d46731; color: #fff; background: #b9440a; }
+.theme-dark .login-submit:hover { background: #c9531b; }
+@media (max-width: 420px) { .login-screen { padding: 16px; }.login-panel { padding: 24px; }.login-heading { margin-top: 24px; } }
 @media (max-width: 640px) {
   .asset-action.v-btn { height: 48px!important; min-height: 48px!important; }
   .eyebrow,.progress-copy > span,.progress-remaining,.asset-id,.status-pill,.mobile-navigation button > span,
