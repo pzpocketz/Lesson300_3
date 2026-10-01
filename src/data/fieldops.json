@@ -1,0 +1,41 @@
+{
+  "assets": [
+    { "id": "VAL-A12", "name": "Valve A-12", "type": "Pipeline valve", "location": "North line · Segment A", "coordinates": [35.2864, -119.0623], "lastChecked": "2026-10-01T06:48:00-07:00", "status": "ok" },
+    { "id": "TRF-T04", "name": "Transformer T-04", "type": "Power transformer", "location": "Central substation", "coordinates": [35.2891, -119.0542], "lastChecked": "2026-10-01T07:02:00-07:00", "status": "attention", "conditionNote": "Cabinet latch needs follow-up inspection." },
+    { "id": "MTR-S07", "name": "Meter Station 7", "type": "Flow meter", "location": "Gathering line · East", "coordinates": [35.2816, -119.0481], "lastChecked": "2026-10-01T07:16:00-07:00", "status": "ok" },
+    { "id": "CNT-C02", "name": "Containment Pad B", "type": "Secondary containment", "location": "Pad B · Tank battery", "coordinates": [35.2779, -119.0604], "lastChecked": null, "status": "pending" },
+    { "id": "PMP-P03", "name": "Transfer Pump P-03", "type": "Transfer pump", "location": "South manifold", "coordinates": [35.2748, -119.0508], "lastChecked": "2026-10-01T08:04:00-07:00", "status": "ok" },
+    { "id": "INV-I11", "name": "Solar Inverter I-11", "type": "Solar inverter", "location": "Solar block · Row 2", "coordinates": [35.2689, -119.056], "lastChecked": null, "status": "pending" },
+    { "id": "VAL-B08", "name": "Valve B-08", "type": "Pipeline valve", "location": "South line · Segment B", "coordinates": [35.266, -119.047], "lastChecked": null, "status": "pending" },
+    { "id": "TNK-T02", "name": "Tank TK-02", "type": "Storage tank", "location": "South well pad", "coordinates": [35.271, -119.039], "lastChecked": null, "status": "pending" },
+    { "id": "TRF-T09", "name": "Transformer T-09", "type": "Power transformer", "location": "East substation", "coordinates": [35.281, -119.036], "lastChecked": null, "status": "pending" }
+  ],
+  "incidents": [
+    { "id": "INC-2026-001", "type": "Spill / release", "severity": "Medium", "description": "Small hydraulic fluid sheen observed below the south manifold. Absorbent pads placed; no soil migration observed.", "coordinates": [35.2748, -119.0508], "timestamp": "2026-10-01T07:24:00-07:00" },
+    { "id": "INC-2026-002", "type": "Near miss", "severity": "Low", "description": "Loose access-panel fastener found at the east substation. Area marked for maintenance follow-up.", "coordinates": [35.281, -119.036], "timestamp": "2026-10-01T08:12:00-07:00" },
+    { "id": "INC-2026-003", "type": "Environmental concern", "severity": "High", "description": "Unusual odor reported near the north gathering line. Area isolated pending supervisor review.", "coordinates": [35.2864, -119.0623], "timestamp": "2026-10-01T08:46:00-07:00" }
+  ],
+  "route": [
+    { "id": "STOP-01", "order": 1, "name": "North Gate", "coordinates": [35.2864, -119.0623], "address": "North access · Segment A", "assetIds": ["VAL-A12"], "flaggedItems": ["Review odor report INC-2026-003"] },
+    { "id": "STOP-02", "order": 2, "name": "Central Substation", "coordinates": [35.2891, -119.0542], "address": "Central service road", "assetIds": ["TRF-T04"], "flaggedItems": ["Transformer cabinet latch needs follow-up"] },
+    { "id": "STOP-03", "order": 3, "name": "Meter Station 7", "coordinates": [35.2816, -119.0481], "address": "East gathering line", "assetIds": ["MTR-S07"], "flaggedItems": [] },
+    { "id": "STOP-04", "order": 4, "name": "Containment Pad B", "coordinates": [35.2779, -119.0604], "address": "Tank battery · Pad B", "assetIds": ["CNT-C02"], "flaggedItems": ["Secondary containment inspection overdue"] },
+    { "id": "STOP-05", "order": 5, "name": "South Manifold", "coordinates": [35.2748, -119.0508], "address": "South process area", "assetIds": ["PMP-P03"], "flaggedItems": ["Review hydraulic fluid cleanup"] },
+    { "id": "STOP-06", "order": 6, "name": "Solar Block · Row 2", "coordinates": [35.2689, -119.056], "address": "Renewables field · South access", "assetIds": ["INV-I11"], "flaggedItems": [] },
+    { "id": "STOP-07", "order": 7, "name": "South Well Pad", "coordinates": [35.271, -119.039], "address": "South access road", "assetIds": ["VAL-B08", "TNK-T02", "TRF-T09"], "flaggedItems": ["Check tank gauge and east substation panel"] }
+  ],
+  "tasks": [
+    { "id": "TASK-001", "name": "Inspect secondary containment — Pad B", "assetId": "CNT-C02", "dueTime": "07:00", "completed": false, "overdue": true },
+    { "id": "TASK-002", "name": "Log meter reading — Station 7", "assetId": "MTR-S07", "dueTime": "07:15", "completed": true, "overdue": false },
+    { "id": "TASK-003", "name": "Verify valve seal — A-12", "assetId": "VAL-A12", "dueTime": "07:30", "completed": true, "overdue": false },
+    { "id": "TASK-004", "name": "Confirm transformer cabinet — T-04", "assetId": "TRF-T04", "dueTime": "08:00", "completed": false, "overdue": false },
+    { "id": "TASK-005", "name": "Check transfer pressure — P-03", "assetId": "PMP-P03", "dueTime": "08:15", "completed": true, "overdue": false },
+    { "id": "TASK-006", "name": "Inspect inverter cooling — I-11", "assetId": "INV-I11", "dueTime": "09:00", "completed": false, "overdue": false },
+    { "id": "TASK-007", "name": "Record tank gauge — TK-02", "assetId": "TNK-T02", "dueTime": "09:30", "completed": true, "overdue": false },
+    { "id": "TASK-008", "name": "Inspect south-line valve — B-08", "assetId": "VAL-B08", "dueTime": "10:00", "completed": false, "overdue": false }
+  ],
+  "crew": [
+    { "id": "CR-01", "name": "Mara Chen", "role": "Field technician", "employeeId": "RE-2048", "assignedStops": ["STOP-01", "STOP-02", "STOP-03", "STOP-04"] },
+    { "id": "CR-02", "name": "Luis Ortega", "role": "Site operator", "employeeId": "RE-2176", "assignedStops": ["STOP-05", "STOP-06", "STOP-07"] }
+  ]
+}
