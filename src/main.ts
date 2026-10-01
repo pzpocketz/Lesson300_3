@@ -20,6 +20,10 @@ const vuetify = createVuetify({
 				dark: false,
 				colors: { primary: '#b9440a', secondary: '#1c3a4a', success: '#28633d', warning: '#8b4e00', error: '#a62d25', background: '#f4f2ee', surface: '#ffffff' },
 			},
+			fieldopsDark: {
+				dark: true,
+				colors: { primary: '#b9440a', secondary: '#a9c7d2', success: '#77c68a', warning: '#f2bd58', error: '#ff9b91', background: '#10191e', surface: '#17242b' },
+			},
 		},
 	},
 })

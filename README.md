@@ -28,6 +28,7 @@ Vite prints the local URL when the development server starts.
 - **Incident:** create a report with type, GPS/manual location, severity, description, and optional photo.
 - **Map:** inspect the ordered route, waypoint assets, and crew location.
 - **Tasks:** review due and overdue compliance work; tap or swipe right to complete a task.
+- **Appearance:** toggle the light or dark theme from the header; the choice is saved on this device.
 
 Edits persist in browser local storage. The route map uses OpenStreetMap tiles and needs a network connection. Mock site data lives in `src/data/fieldops.json`.
 
